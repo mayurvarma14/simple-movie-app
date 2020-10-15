@@ -4,8 +4,8 @@ module.exports = {
   async find() {},
   async register(req, res, next) {
     try {
-      const data = await service.create(req.body);
-      return res.json(data);
+      const user = await service.create(req.body);
+      return res.json(user);
     } catch (error) {
       return next(error);
     }
@@ -13,16 +13,16 @@ module.exports = {
   async login(req, res, next) {
     try {
       const { email, password } = req.body;
-      const data = await service.login(email, password);
-      return res.json(data);
+      const user = await service.login(email, password);
+      return res.json(user);
     } catch (error) {
       return next(error);
     }
   },
   async profile(req, res, next) {
     try {
-      const data = await service.findOne({ _id: req.user.id });
-      return res.json(data);
+      const user = await service.findOne({ _id: req.user.id });
+      return res.json(user);
     } catch (error) {
       return next(error);
     }
