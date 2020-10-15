@@ -16,7 +16,7 @@ module.exports = {
   },
   async find(req, res, next) {
     try {
-      const movie = await service.find();
+      const movie = await service.find(req.query);
       return res.json(movie);
     } catch (error) {
       return next(error);

@@ -41,4 +41,7 @@ const movieSchema = new Schema(
     timestamps: true,
   }
 );
+
+movieSchema.index({ name: 'text', director: 'text' });
+
 module.exports = mongoose.model('Movie', movieSchema);
