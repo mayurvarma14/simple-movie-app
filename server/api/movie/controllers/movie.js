@@ -51,5 +51,13 @@ module.exports = {
       return next(error);
     }
   },
-  async remove() {},
+  async remove(req, res, next) {
+    try {
+      const { id } = req.params;
+      const movie = await service.remove({ _id: id });
+      return res.json(movie);
+    } catch (error) {
+      return next(error);
+    }
+  },
 };

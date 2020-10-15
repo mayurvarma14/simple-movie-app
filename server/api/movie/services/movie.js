@@ -1,12 +1,8 @@
-const httpStatus = require('http-status');
-
 const Movie = require('../models/movie');
-const Genre = require('../../genre/models/genre');
-const APIError = require('../../../utils/APIError');
 
 module.exports = {
   async create(data) {
-    return Movie.create(data);
+    return Movie.create(data).populate('genre');
   },
   async find(data) {
     return Movie.find(data).populate('genre');
@@ -19,5 +15,7 @@ module.exports = {
       'genre'
     );
   },
-  async remove() {},
+  async remove(condition) {
+    return Movie.findOneAndRemove(condition).populate('genre');
+  },
 };
