@@ -11,11 +11,13 @@ const movieSchema = new Schema(
       type: Number,
       required: true,
     },
-    genre: {
-      type: [{ type: Schema.Types.ObjectId, required: true }],
-      ref: 'Genre',
-      required: true,
-    },
+    genre: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Genre',
+        required: true,
+      },
+    ],
     director: {
       type: String,
       required: true,

@@ -2,7 +2,8 @@ const Movie = require('../models/movie');
 
 module.exports = {
   async create(data) {
-    return Movie.create(data).populate('genre');
+    const movie = await Movie.create(data);
+    return movie.populate('genre').execPopulate();
   },
   async find(data) {
     return Movie.find(data).populate('genre');
