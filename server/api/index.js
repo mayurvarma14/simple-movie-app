@@ -16,38 +16,13 @@ router.use('/users', userRoutes);
 router.use('/movies', movieRoutes);
 router.use('/genres', genreRoutes);
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Movie App',
-      version: '0.1.0',
-      description: 'Movie App',
-      license: {
-        name: 'MIT',
-        url: 'https://choosealicense.com/licenses/mit/',
-      },
-    },
-    servers: [
-      {
-        url: 'http://127.0.0.1:5000',
-      },
-    ],
-  },
-  apis: [
-    './api/user/models/user.js',
-    './api/user/config/routes.js',
-    './api/movie/models/movie.js',
-    './api/genre/models/genre.js',
-  ],
-};
-const spec = fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8');
-const swaggerDoc = jsyaml.safeLoad(spec);
-// const specs = swaggerJsdoc(options);
+// const spec = fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8');
+// const swaggerDoc = jsyaml.safeLoad(spec);
+
 router.use(
   '/docs',
   swaggerUi.serve,
-  swaggerUi.setup(swaggerDoc, { explorer: true })
+  swaggerUi.setup(require('../config/documentation.json'), { explorer: true })
 );
 
 module.exports = { routes: router, user: { service: userService } };

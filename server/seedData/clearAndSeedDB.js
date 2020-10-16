@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 require('dotenv').config();
 const data = require('./db.json');
-const database = require('./config/database');
-const Movie = require('./api/movie/models/movie');
-const Genre = require('./api/genre/models/genre');
-const User = require('./api/user/models/user');
+const database = require('../config/database');
+const Movie = require('../api/movie/models/movie');
+const Genre = require('../api/genre/models/genre');
+const User = require('../api/user/models/user');
 
 async function createGenres(userId) {
   let genres = new Set();

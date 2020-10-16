@@ -6,6 +6,7 @@ const genreSchema = new Schema(
     title: {
       type: String,
       required: true,
+      unique: true,
     },
     createdBy: {
       type: Schema.Types.ObjectId,

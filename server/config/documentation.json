@@ -1,0 +1,525 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Movie App",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/users/profile": {
+      "get": {
+        "summary": "Get a current user profile details",
+        "tags": ["User"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An users object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "summary": "Logs user into the system",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A user schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/register": {
+      "post": {
+        "summary": "Create a new user",
+        "tags": ["User"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A user schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/": {
+      "get": {
+        "summary": "Get list of movies",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search movies matching provided text"
+          },
+          {
+            "in": "query",
+            "name": "genre",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "matrix",
+            "explode": true,
+            "description": "Get movies by genre. You can pass an array"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sort movies by field name"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Set sorting order asc/desc. asc is default"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit results. Default is 100"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Get data based on page number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An movies object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new movie",
+        "tags": ["Movie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A movie schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "summary": "Get movie by id",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Movie Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An movies object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update movie by id",
+        "tags": ["Movie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Movie Id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Movie"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An movies object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete movie by id",
+        "tags": ["Movie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Movie Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An movies object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genres/": {
+      "get": {
+        "summary": "Get list of genres",
+        "tags": ["Genre"],
+        "responses": {
+          "200": {
+            "description": "An genres object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add new genre",
+        "tags": ["Genre"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Genre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A genre schema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genres/{id}": {
+      "get": {
+        "summary": "Get genre by id",
+        "tags": ["Genre"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Genre Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An genres object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update genre by id",
+        "tags": ["Genre"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Genre Id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Genre"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An genres object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete genre by id",
+        "tags": ["Genre"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Genre Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An genres object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "UserLogin": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User Email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User Password"
+          }
+        },
+        "example": {
+          "email": "test@test.com",
+          "password": "123456"
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User Email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User Password"
+          },
+          "role": {
+            "type": "string",
+            "description": "User Role can be 'user' or 'admin'"
+          }
+        },
+        "example": {
+          "name": "Test",
+          "email": "test@test.com",
+          "password": "123456",
+          "role": "admin"
+        }
+      },
+      "Genre": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "title": "Action"
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "required": ["name", "imdbScore", "genre", "director", "popularity"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "imdbScore": {
+            "type": "number"
+          },
+          "genre": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "genre id"
+          },
+          "director": {
+            "type": "string"
+          },
+          "popularity": {
+            "type": "number"
+          }
+        },
+        "example": {
+          "name": "Test",
+          "imdbScore": 5.5,
+          "genre": ["5f88eb527e404a25d5d2a821"],
+          "director": "test",
+          "popularity": 45
+        }
+      }
+    }
+  }
+}
