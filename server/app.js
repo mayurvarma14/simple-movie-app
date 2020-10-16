@@ -3,7 +3,6 @@ const path = require('path');
 const logger = require('morgan');
 const compress = require('compression');
 const helmet = require('helmet');
-
 const httpStatus = require('http-status');
 
 const database = require('./config/database');
@@ -44,5 +43,4 @@ app.use((req, res, next) => {
 
 // error handler
 app.use(errorHandler);
-
 module.exports = app;
