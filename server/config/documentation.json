@@ -12,11 +12,7 @@
       "url": "http://127.0.0.1:5000"
     }
   ],
-  "security": [
-    {
-      "BearerAuth": []
-    }
-  ],
+  "security": [],
   "paths": {
     "/users/profile": {
       "get": {
