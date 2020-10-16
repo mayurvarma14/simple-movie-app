@@ -2,7 +2,7 @@ const cors = require('cors');
 
 const allowedOrigins = [
   'http://127.0.0.1:5000',
-  'https://simple-movie-app.herokuapp.com',
+  'https://simple-movie-service.herokuapp.com',
 ];
 
 module.exports = cors({
