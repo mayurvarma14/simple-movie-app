@@ -8,7 +8,7 @@ const User = require('./api/user/models/user');
 
 async function createGenres(userId) {
   let genres = new Set();
-  data.forEach((movie) => movie.genre.forEach((item) => genres.add(item)));
+  data.forEach((movie) => movie.genre.forEach((item) => genres.add(item.trim())));
   const genreObject = {};
   genres = Array.from(genres).map((genre) => ({
     title: genre,
@@ -36,15 +36,17 @@ async function createMovies() {
   console.log('Created user');
   const genres = await createGenres(user._id);
   console.log('Created genres');
-  const promises = data.map((movie) => Movie.create({
-      name: movie.name,
-      imdbScore: movie.imdb_score,
-      director: movie.director,
-      popularity: movie['99popularity'],
-      genre: movie.genre.map((item) => genres[item]),
-      createdBy: user._id,
-      updatedBy: user._id,
-    }));
+  const promises = data.map((movie) =>
+    Movie.create({
+    name: movie.name,
+    imdbScore: movie.imdb_score,
+    director: movie.director,
+    popularity: movie['99popularity'],
+    genre: movie.genre.map((item) => genres[item.trim()]),
+    createdBy: user._id,
+    updatedBy: user._id,
+  })
+  );
   await Promise.all(promises);
 }
 
