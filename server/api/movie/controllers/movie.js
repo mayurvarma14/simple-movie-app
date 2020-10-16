@@ -1,3 +1,4 @@
+const APIError = require('../../../utils/APIError');
 const service = require('../services/movie');
 
 module.exports = {
@@ -38,7 +39,12 @@ module.exports = {
     try {
       const { _id: userId } = req.user;
       const { id } = req.params;
-
+      if (req.body.name) {
+        const movie = await service.findOne({ _id: id });
+        if (movie && movie.name !== req.body.name) {
+          throw new APIError(400, 'Updating movie name not allowed');
+        }
+      }
       const movie = await service.update(
         { _id: id },
         {
