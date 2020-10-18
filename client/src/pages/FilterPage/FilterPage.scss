@@ -26,6 +26,29 @@
         }
       }
     }
+    .genre-filter {
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 3px 3px 12px 2px #00000014;
+      .chips-title {
+        padding: 10px 10px;
+      }
+      .chips {
+        ul {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          list-style: none;
+          padding-inline-start: 0;
+          li {
+            padding: 5px;
+            // cursor: pointer;
+          }
+        }
+      }
+    }
   }
   .movie-list {
     width: 80%;

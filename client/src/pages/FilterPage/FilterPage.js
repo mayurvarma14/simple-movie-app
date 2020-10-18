@@ -98,7 +98,14 @@ class FilterPage extends Component {
             </FormControl>
           </div>
           <div className="genre-filter">
-            <div className="title"></div>
+            <Typography
+              className="chips-title"
+              gutterBottom={true}
+              variant="subtitle2"
+            >
+              Chips
+            </Typography>
+            <Divider />
             <div className="chips">
               <ul>
                 {genres.map(({ _id, title }) => {
@@ -106,6 +113,9 @@ class FilterPage extends Component {
                     <li key={_id}>
                       <Chip
                         label={title}
+                        onClick={(event) => {
+                          console.log(title);
+                        }}
                         // onDelete={() => {}}
                         variant="outlined"
                       />
