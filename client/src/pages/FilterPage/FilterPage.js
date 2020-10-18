@@ -13,6 +13,7 @@ import {
   fetchMovies,
   setQueryParam,
   resetMovieDefaults,
+  setGenre,
 } from '../../redux/movie/movieActions';
 import { fetchGenres } from '../../redux/genre/genreActions';
 import MovieList from '../../components/MovieList/MovieList';
@@ -43,7 +44,7 @@ class FilterPage extends Component {
 
   render() {
     const { genres } = this.props.genre;
-    const { sortBy, sortOrder, movies, isLoading } = this.props.movie;
+    const { sortBy, sortOrder, movies, isLoading, genre } = this.props.movie;
 
     if (isLoading)
       return (
@@ -109,12 +110,16 @@ class FilterPage extends Component {
             <div className="chips">
               <ul>
                 {genres.map(({ _id, title }) => {
+                  const chipClass = genre[_id] ? 'active' : null;
+
                   return (
                     <li key={_id}>
                       <Chip
                         label={title}
-                        onClick={(event) => {
+                        className={chipClass}
+                        onClick={() => {
                           console.log(title);
+                          this.props.setGenre(_id, title);
                         }}
                         // onDelete={() => {}}
                         variant="outlined"
@@ -137,5 +142,5 @@ export default connect(
     movie,
     genre,
   }),
-  { fetchMovies, setQueryParam, resetMovieDefaults, fetchGenres }
+  { fetchMovies, setQueryParam, resetMovieDefaults, fetchGenres, setGenre }
 )(FilterPage);

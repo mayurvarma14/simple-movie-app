@@ -4,6 +4,7 @@ import {
   MOVIES_LOADING,
   RESET_MOVIES,
   SET_QUERY_PARAM,
+  SET_GENRE,
 } from './movieTypes';
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
   query: '',
   page: 0,
   limit: 30,
-  genre: [],
+  genre: {},
   movies: [],
 };
 
@@ -28,6 +29,11 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, isLoading: payload };
     case SET_QUERY_PARAM:
       return { ...state, [payload.key]: payload.value };
+    case SET_GENRE:
+      return {
+        ...state,
+        genre: { ...state.genre, [payload.key]: payload.value },
+      };
 
     default:
       return state;

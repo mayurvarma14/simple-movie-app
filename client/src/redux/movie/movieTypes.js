@@ -3,3 +3,4 @@ export const MOVIES_LOADING = 'MOVIES_LOADING';
 export const MOVIES_LOADED = 'MOVIES_LOADED';
 export const RESET_MOVIES = 'RESET_MOVIES';
 export const SET_QUERY_PARAM = 'SET_QUERY_PARAM';
+export const SET_GENRE = 'SET_GENRE';

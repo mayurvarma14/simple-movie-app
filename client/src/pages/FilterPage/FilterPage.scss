@@ -1,5 +1,10 @@
 .filterpage {
   display: flex;
+  .movie-list {
+    .movie {
+      width: 200px;
+    }
+  }
   .sidebar {
     width: 20%;
     display: flex;
@@ -44,6 +49,12 @@
           padding-inline-start: 0;
           li {
             padding: 5px;
+            .active {
+              background: #04a9f4;
+              color: white;
+              font-weight: 500;
+              border: none;
+            }
             // cursor: pointer;
           }
         }

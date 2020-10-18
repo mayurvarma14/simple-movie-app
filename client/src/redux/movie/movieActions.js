@@ -5,21 +5,26 @@ import {
   MOVIES_LOADED,
   RESET_MOVIES,
   SET_QUERY_PARAM,
+  SET_GENRE,
 } from './movieTypes';
 
 export const fetchMovies = (options, reset) => async (dispatch, getState) => {
   // if (reset) dispatch({ type: RESET_MOVIES, payload: [] });
   const {
-    movie: { sortBy, sortOrder, page, limit },
+    movie: { sortBy, sortOrder, page, limit, genre },
   } = getState();
+
   const currentOptions = { sortBy, sortOrder, page, limit };
   const newOptions = { ...currentOptions, ...options };
-  const queryParams = new URLSearchParams(newOptions).toString();
+  const queryParams = new URLSearchParams(newOptions);
+  Object.values(genre).forEach((item) =>
+    item ? queryParams.append('genre', item) : null
+  );
 
   dispatch({ type: MOVIES_LOADING, payload: true });
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/movies?${queryParams}`
+      `${process.env.REACT_APP_BACKEND_URL}/movies?${queryParams.toString()}`
     );
 
     dispatch({ type: FETCH_MOVIES, payload: data });
@@ -37,4 +42,15 @@ export const setQueryParam = (param) => async (dispatch) => {
 
 export const resetMovieDefaults = (param) => async (dispatch) => {
   dispatch({ type: RESET_MOVIES });
+};
+export const setGenre = (id, title) => async (dispatch, getState) => {
+  const {
+    movie: { genre },
+  } = getState();
+  let payload = { key: id, value: title };
+  if (genre[id]) {
+    payload.value = undefined;
+  }
+  dispatch({ type: SET_GENRE, payload });
+  dispatch(fetchMovies());
 };
