@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Container,
+  AppBar,
+  Toolbar,
+  Typography,
+  CssBaseline,
+  Card,
+  InputBase,
+  Button,
+} from '@material-ui/core';
+import { Search } from '@material-ui/icons';
+
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <AppBar className="navbar">
+        <Toolbar className="toolbar">
+          <Typography variant="h5">Movie App</Typography>
+          <div className="search">
+            <div className="search-icon">
+              <Search />
+            </div>
+            <InputBase placeholder="Search…" className="search-input" />
+          </div>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm">Hello</Container>
+    </>
   );
 }
 
