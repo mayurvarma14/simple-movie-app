@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -9,10 +11,12 @@ import {
 import { Search } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
+import { fetchMovies, setQueryParam } from '../../redux/movie/movieActions';
 import './Header.scss';
 import Logo from '../../assets/logo.png';
 
 class Header extends Component {
+  state = { search: '' };
   render() {
     return (
       <AppBar className="navbar" position="static">
@@ -25,7 +29,29 @@ class Header extends Component {
             <div className="search-icon">
               <Search />
             </div>
-            <InputBase placeholder="Search…" className="search-input" />
+            <InputBase
+              placeholder="Search…"
+              className="search-input"
+              value={this.state.search}
+              onChange={(event) =>
+                this.setState({ search: event.target.value })
+              }
+              onKeyUp={(event) => {
+                if (event.key === 'Enter') {
+                  console.log(
+                    'Log: Header -> render -> this.props',
+                    this.props
+                  );
+                  this.props.history.push('/filter');
+                  this.props.setQueryParam({
+                    key: 'query',
+                    value: this.state.search,
+                  });
+                  this.props.fetchMovies();
+                  this.setState({ search: '' });
+                }
+              }}
+            />
           </div>
           <Link to="/filter">
             <Button color="inherit" className="filter-button">
@@ -41,4 +67,6 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(
+  connect(null, { fetchMovies, setQueryParam })(Header)
+);

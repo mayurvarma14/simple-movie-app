@@ -11,10 +11,10 @@ import {
 export const fetchMovies = (options, reset) => async (dispatch, getState) => {
   // if (reset) dispatch({ type: RESET_MOVIES, payload: [] });
   const {
-    movie: { sortBy, sortOrder, page, limit, genre },
+    movie: { sortBy, sortOrder, page, limit, genre, query },
   } = getState();
 
-  const currentOptions = { sortBy, sortOrder, page, limit };
+  const currentOptions = { sortBy, sortOrder, page, limit, query };
   const newOptions = { ...currentOptions, ...options };
   const queryParams = new URLSearchParams(newOptions);
   Object.values(genre).forEach((item) =>

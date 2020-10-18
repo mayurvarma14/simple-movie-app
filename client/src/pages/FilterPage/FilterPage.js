@@ -8,6 +8,7 @@ import {
   Typography,
   Divider,
 } from '@material-ui/core';
+
 import { ReactComponent as Loader } from '../../assets/loading.svg';
 import {
   fetchMovies,
@@ -21,7 +22,7 @@ import './FilterPage.scss';
 
 class FilterPage extends Component {
   componentDidMount() {
-    this.props.resetMovieDefaults();
+    if (!this.props.movie.query) this.props.resetMovieDefaults();
     this.props.fetchMovies();
     this.props.fetchGenres();
   }
