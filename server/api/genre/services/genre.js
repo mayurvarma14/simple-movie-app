@@ -5,7 +5,7 @@ module.exports = {
     return Genre.create(data);
   },
   async find(data) {
-    return Genre.find(data);
+    return Genre.find(data).sort({ title: 'asc' });
   },
   async findOne(data) {
     return Genre.findOne(data);
