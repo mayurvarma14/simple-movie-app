@@ -1,35 +1,22 @@
 import React from 'react';
-import {
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  CssBaseline,
-  Card,
-  InputBase,
-  Button,
-} from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import { CssBaseline, Container } from '@material-ui/core';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { HomePage, FilterPage } from './pages';
+import { Header } from './components';
 import './App.scss';
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <AppBar className="navbar">
-        <Toolbar className="toolbar">
-          <Typography variant="h5">Movie App</Typography>
-          <div className="search">
-            <div className="search-icon">
-              <Search />
-            </div>
-            <InputBase placeholder="Search…" className="search-input" />
-          </div>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-      <Container maxWidth="sm">Hello</Container>
+      <Header />
+      <Container max Width="lg" className="container">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/filter" component={FilterPage} />
+        </Switch>
+      </Container>
     </>
   );
 }

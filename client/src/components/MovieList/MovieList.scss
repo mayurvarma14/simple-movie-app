@@ -1,0 +1,21 @@
+.movie-list {
+  display: flex;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  .movie {
+    width: 250px;
+    margin: 10px;
+    .image {
+      height: 250px;
+    }
+    .rating {
+      display: flex;
+      padding: 5px 0;
+      .value {
+        padding: 0 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+export const FETCH_GENRES = 'FETCH_GENRES';
+export const GENRES_LOADING = 'GENRES_LOADING';
+export const GENRES_LOADED = 'GENRES_LOADED';
+export const RESET_GENRES = 'RESET_GENRES';

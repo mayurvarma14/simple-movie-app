@@ -1,0 +1,33 @@
+.filterpage {
+  display: flex;
+  .sidebar {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    .sort {
+      display: flex;
+      flex-direction: column;
+      height: 350px;
+      justify-content: space-around;
+      .sort-title {
+        padding: 10px 10px;
+      }
+      .sort-by,
+      .sort-order {
+        border-radius: 10px;
+        background: white;
+        box-shadow: 3px 3px 12px 2px #00000014;
+        .dropdown {
+          margin: 20px;
+          margin-top: 30px;
+          .MuiOutlinedInput-input {
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+  .movie-list {
+    width: 80%;
+  }
+}
